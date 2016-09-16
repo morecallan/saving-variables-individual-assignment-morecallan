@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using SavingVariables.Models;
+using System.Data.Entity;
 
 namespace SavingVariables.DAL
 {
