@@ -18,12 +18,5 @@ namespace SavingVariables.Models
         [Required]
         public int Val { get; set; }
 
-        //Constructor: Can only be instantiated with dependencies.
-        public Variable(char _var, int _val)
-        {
-            Var = _var;
-            Val = _val;
-        }
-
     }
 }

@@ -4,10 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SavingVariables.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class ModelVariableTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void VariableModelCanOnly()
         {
         }
     }
