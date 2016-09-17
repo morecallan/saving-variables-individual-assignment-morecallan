@@ -11,7 +11,7 @@ namespace SavingVariables.Tests
     [TestClass]
     public class VariablesRepositoryTests
     {
-        Mock<VariablesContext> mock_context { get; set; }
+        Mock<VariablesContext> mock_context { get; set; } 
         Mock<DbSet<Variable>> mock_variable_table { get; set; }
         List<Variable> variable_list { get; set; }
 
@@ -31,6 +31,16 @@ namespace SavingVariables.Tests
 
             // Add stuff to our representatve table
             mock_variable_table.Setup(t => t.Add(It.IsAny<Variable>())).Callback((Variable v) => variable_list.Add(v));
+        }
+
+        // RESET before each test
+        [TestInitialize]
+        public void Initialize()
+        {
+            // Populate mock context
+            mock_context = new Mock<VariablesContext>();
+            mock_variable_table = new Mock<DbSet<Variable>>();
+            variable_list = new List<Variable>();
         }
     }
 }
