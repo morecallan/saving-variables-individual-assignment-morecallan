@@ -48,5 +48,47 @@ namespace SavingVariables.Tests
         {
 
         }
+
+        [TestMethod]
+        public void VariablesRepoShouldReturnFullListOfVariables()
+        {
+
+        }
+
+        [TestMethod]
+        public void VariablesRepoShouldBeAbleToAddVariables()
+        {
+
+        }
+
+        [TestMethod]
+        public void VariablesRepoShouldBeAbleToAddedWithVarAndValArguments()
+        {
+
+        }
+
+        [TestMethod]
+        public void VariablesRepoShouldOnlyBeAbleToAddValidVarAndVal()
+        {
+
+        }
+
+        [TestMethod]
+        public void VariablesRepoShouldBeAbleToFindSpecificVariables()
+        {
+
+        }
+
+        [TestMethod]
+        public void VariablesRepoShouldBeAbleToDeleteSpecificVariable()
+        {
+
+        }
+
+        [TestMethod]
+        public void VariablesRepoShouldNotBeAbleToDeleteAVariableThatDoesNotExit()
+        {
+
+        }
     }
 }
