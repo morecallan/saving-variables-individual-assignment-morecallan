@@ -11,10 +11,8 @@ namespace SavingVariables.Models
     {
         [Key]
         public int VariableId { get; set; }
-
-        //Properties: => Table columns.
         [Required]
-        public char Var { get; set; }
+        public string VarSym { get; set; }
         [Required]
         public int Val { get; set; }
 

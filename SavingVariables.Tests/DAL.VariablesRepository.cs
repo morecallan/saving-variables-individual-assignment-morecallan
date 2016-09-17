@@ -42,5 +42,11 @@ namespace SavingVariables.Tests
             mock_variable_table = new Mock<DbSet<Variable>>();
             variable_list = new List<Variable>();
         }
+
+        [TestMethod]
+        public void VariablesRepoOrignallyReturnsNoVariables()
+        {
+
+        }
     }
 }
