@@ -130,6 +130,26 @@ namespace SavingVariables.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(System.InvalidOperationException))]
+        public void VariableRepoShouldThrowOperationExceptionIfThereIsAttemptToAddVariableTwiceWithParams()
+        {
+            // Arrange
+            Variable variable_to_add = new Variable { VarSym = "x", Val = 4 };
+            repo.AddVariableAsEntity(variable_to_add);
+            repo.AddVariablesWithVarAndValParameter("x", 9);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.InvalidOperationException))]
+        public void VariableRepoShouldThrowOperationExceptionIfThereIsAttemptToAddVariableTwiceWithEntity()
+        {
+            // Arrange
+            repo.AddVariablesWithVarAndValParameter("h", 9);
+            Variable variable_to_add = new Variable { VarSym = "h", Val = 4 };
+            repo.AddVariableAsEntity(variable_to_add);
+        }
+
+        [TestMethod]
         public void VariablesRepoShouldBeAbleToFindSpecificVariables()
         {
             // Arrange

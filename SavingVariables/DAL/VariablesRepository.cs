@@ -22,20 +22,13 @@ namespace SavingVariables.DAL
             return Context.Variables.ToList();
         }
 
-        /// CREATE ////
-        public void AddVariableAsEntity(Variable variable)
-        {
-            Context.Variables.Add(variable);
-            Context.SaveChanges();
-        }
-
         /// READ | FIND ///
         public Variable FindVariablesGivenVarSym(string var_sym)
         {
             //Variable my_found_var = Context.Variables.Find(var_sym);
             //return my_found_var;
 
-            List<Variable> current_variable_list = Context.Variables.ToList();
+            List<Variable> current_variable_list = GetCurrentVariables();
             Variable found_variable = null;
             foreach (var variable in current_variable_list)
             {
@@ -43,7 +36,8 @@ namespace SavingVariables.DAL
                 {
                     found_variable = variable;
                     return found_variable;
-                } else
+                }
+                else
                 {
                     found_variable = null;
                 }
@@ -52,13 +46,47 @@ namespace SavingVariables.DAL
         }
 
         /// CREATE ////
-        public void AddVariablesWithVarAndValParameter(string var, int val)
+        public void AddVariableAsEntity(Variable variable)
         {
-            Variable my_new_variable = new Variable { VarSym = var, Val = val };
-            Context.Variables.Add(my_new_variable);
-            Context.SaveChanges();
+            Variable variable_check = FindVariablesGivenVarSym(variable.VarSym);
+            if (variable_check == null)
+            {
+                Context.Variables.Add(variable);
+                Context.SaveChanges();
+            } else
+            {
+                throw new InvalidOperationException();
+            }
         }
 
+
+        /// CREATE ////
+        public void AddVariablesWithVarAndValParameter(string var, int val)
+        {
+            Variable variable_check = FindVariablesGivenVarSym(var);
+            if (variable_check == null)
+            {
+                Variable my_new_variable = new Variable { VarSym = var, Val = val };
+                Context.Variables.Add(my_new_variable);
+                Context.SaveChanges();
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
+
+
+        /// DESTROY ///
+        public void RemoveVariablesWithVarParameter(string var)
+        {
+            Variable variable_to_delete = FindVariablesGivenVarSym(var);
+            if (variable_to_delete != null)
+            {
+                Context.Variables.Remove(variable_to_delete);
+                Context.SaveChanges();
+            }
+        }
 
     }
 }
