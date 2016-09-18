@@ -1,4 +1,5 @@
 ﻿using SavingVariables.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,12 +29,21 @@ namespace SavingVariables.DAL
             Context.SaveChanges();
         }
 
-        /// CREATE ////
-        public void AddVariablesWithVarAndValParameter(char var, int val)
+        /// READ | FIND ///
+        public Variable FindVariablesGivenVarSym(string var_sym)
         {
-            Variable my_new_variable = new Variable { VarSym = var.ToString(), Val = val };
+            Variable my_found_var = Context.Variables.Find(var_sym);
+            return my_found_var;
+        }
+
+        /// CREATE ////
+        public void AddVariablesWithVarAndValParameter(string var, int val)
+        {
+            Variable my_new_variable = new Variable { VarSym = var, Val = val };
             Context.Variables.Add(my_new_variable);
             Context.SaveChanges();
         }
+
+
     }
 }

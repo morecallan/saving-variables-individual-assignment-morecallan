@@ -33,8 +33,6 @@ namespace SavingVariables.Tests
             // Add | Remove  stuff to our representatve table
             mock_variable_table.Setup(t => t.Add(It.IsAny<Variable>())).Callback((Variable v) => variable_list.Add(v));
             mock_variable_table.Setup(t => t.Remove(It.IsAny<Variable>())).Callback((Variable a) => variable_list.Remove(a));
-            //mock_variable_table.Setup(t => t.Find(It.IsAny<Variable>())).Callback((Variable a) => variable_list.Contains(a));
-
         }
 
         // RESET before each test
@@ -108,18 +106,43 @@ namespace SavingVariables.Tests
         [TestMethod]
         public void VariablesRepoShouldBeAbleToAddedWithVarAndValArguments()
         {
+            //Act
+            Variable variable_to_add = new Variable { VarSym = "xa", Val = 4 };
+            repo.AddVariableAsEntity(variable_to_add);
 
+            int expected_variable_count = 1;
+            int actual_variable_count = repo.GetCurrentVariables().Count();
+
+            //Assert
+            Assert.AreEqual(expected_variable_count, actual_variable_count);
         }
 
         [TestMethod]
         public void VariablesRepoShouldOnlyBeAbleToAddValidVarAndVal()
         {
+            //Act
 
+            int expected_variable_count = 0;
+            int actual_variable_count = repo.GetCurrentVariables().Count();
+
+            //Assert
+            Assert.AreEqual(expected_variable_count, actual_variable_count);
         }
 
         [TestMethod]
         public void VariablesRepoShouldBeAbleToFindSpecificVariables()
         {
+            // Arrange
+            Variable variable_to_add = new Variable { VarSym = "x", Val = 4 };
+            repo.AddVariableAsEntity(variable_to_add);
+            repo.AddVariablesWithVarAndValParameter("g", 9 );
+
+            //Act
+            int expected_variable_value = 9;
+            int actual_expected_value = repo.FindVariablesGivenVarSym("g").Val;
+
+            //Assert
+            Assert.AreEqual(expected_variable_value, actual_expected_value);
 
         }
 
