@@ -12,6 +12,7 @@ namespace SavingVariables.Models
         [Key]
         public int VariableId { get; set; }
         [Required]
+        [MaxLength(length: 1, ErrorMessage = "Only one character variables allowed.")]
         public string VarSym { get; set; }
         [Required]
         public int Val { get; set; }
