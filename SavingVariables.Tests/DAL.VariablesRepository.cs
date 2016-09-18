@@ -146,8 +146,30 @@ namespace SavingVariables.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(System.NullReferenceException))]
+        public void VariablesRepoShouldReturnNullReferenceExceptionForNonFoundVariables()
+        {
+            // Arrange
+            Variable variable_to_add = new Variable { VarSym = "x", Val = 4 };
+            repo.AddVariableAsEntity(variable_to_add);
+            repo.AddVariablesWithVarAndValParameter("g", 9);
+
+            //Act
+            int expected_variable_value = 9;
+            int actual_expected_value = repo.FindVariablesGivenVarSym("d").Val;
+
+            //Assert
+            Assert.AreEqual(expected_variable_value, actual_expected_value);
+        }
+
+        [TestMethod]
         public void VariablesRepoShouldBeAbleToDeleteSpecificVariable()
         {
+            // Arrange
+            Variable variable_to_add = new Variable { VarSym = "x", Val = 4 };
+            repo.AddVariableAsEntity(variable_to_add);
+            repo.AddVariablesWithVarAndValParameter("g", 9);
+            repo.AddVariablesWithVarAndValParameter("d", 11);
 
         }
 
