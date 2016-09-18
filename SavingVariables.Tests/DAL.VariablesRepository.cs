@@ -93,7 +93,16 @@ namespace SavingVariables.Tests
         [TestMethod]
         public void VariablesRepoShouldBeAbleToAddVariables()
         {
+            //Act
+            Variable variable_to_add = new Variable { VarSym = "x", Val = 4 };
+            repo.AddVariableAsEntity(variable_to_add);
 
+
+            int expected_variable_count = 1;
+            int actual_variable_count = repo.GetCurrentVariables().Count();
+
+            //Assert
+            Assert.AreEqual(expected_variable_count, actual_variable_count);
         }
 
         [TestMethod]
