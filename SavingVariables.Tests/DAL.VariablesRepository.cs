@@ -14,6 +14,7 @@ namespace SavingVariables.Tests
         Mock<VariablesContext> mock_context { get; set; } 
         Mock<DbSet<Variable>> mock_variable_table { get; set; }
         List<Variable> variable_list { get; set; }
+        VariablesRepository repo { get; set; }
 
 
         public void ConnectMocksToDatastore()
@@ -29,8 +30,11 @@ namespace SavingVariables.Tests
             // This is now our table the is representative of the REAL DATABASE.
             mock_context.Setup(c => c.Variables).Returns(mock_variable_table.Object);
 
-            // Add stuff to our representatve table
+            // Add | Remove  stuff to our representatve table
             mock_variable_table.Setup(t => t.Add(It.IsAny<Variable>())).Callback((Variable v) => variable_list.Add(v));
+            mock_variable_table.Setup(t => t.Remove(It.IsAny<Variable>())).Callback((Variable a) => variable_list.Remove(a));
+            //mock_variable_table.Setup(t => t.Find(It.IsAny<Variable>())).Callback((Variable a) => variable_list.Contains(a));
+
         }
 
         // RESET before each test
@@ -41,6 +45,31 @@ namespace SavingVariables.Tests
             mock_context = new Mock<VariablesContext>();
             mock_variable_table = new Mock<DbSet<Variable>>();
             variable_list = new List<Variable>();
+            repo = new VariablesRepository(mock_context.Object);
+
+            ConnectMocksToDatastore();
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            repo = null;
+        }
+
+        [TestMethod]
+        public void VariablesRepoIsCreatedInInitializeMethod()
+        {
+            //Assert
+            Assert.IsNotNull(repo);
+        }
+
+        [TestMethod]
+        public void VariablesRepoHasContext()
+        {
+            //Act
+            VariablesContext actual_context = repo.Context;
+            //Assert
+            Assert.IsInstanceOfType(actual_context, typeof(VariablesContext));
         }
 
         [TestMethod]
