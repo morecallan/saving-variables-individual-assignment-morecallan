@@ -32,8 +32,23 @@ namespace SavingVariables.DAL
         /// READ | FIND ///
         public Variable FindVariablesGivenVarSym(string var_sym)
         {
-            Variable my_found_var = Context.Variables.Find(var_sym);
-            return my_found_var;
+            //Variable my_found_var = Context.Variables.Find(var_sym);
+            //return my_found_var;
+
+            List<Variable> current_variable_list = Context.Variables.ToList();
+            Variable found_variable = null;
+            foreach (var variable in current_variable_list)
+            {
+                if (variable.VarSym == var_sym)
+                {
+                    found_variable = variable;
+                    return found_variable;
+                } else
+                {
+                    found_variable = null;
+                }
+            }
+            return found_variable;
         }
 
         /// CREATE ////

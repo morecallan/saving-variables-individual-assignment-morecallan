@@ -143,7 +143,6 @@ namespace SavingVariables.Tests
 
             //Assert
             Assert.AreEqual(expected_variable_value, actual_expected_value);
-
         }
 
         [TestMethod]
