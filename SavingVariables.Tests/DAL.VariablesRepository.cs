@@ -85,7 +85,18 @@ namespace SavingVariables.Tests
         [TestMethod]
         public void VariablesRepoShouldReturnFullListOfVariables()
         {
+            //Arrange
+            repo.AddVariablesWithVarAndValParameter("g", 9);
+            repo.AddVariablesWithVarAndValParameter("z", 10);
+            repo.AddVariablesWithVarAndValParameter("l", -7);
 
+            //Act
+            List<Variable> current_variables = repo.GetCurrentVariables();
+            int expected_variables_count = 3;
+            int actual_variables_count = current_variables.Count();
+
+            //Assert
+            Assert.AreEqual(expected_variables_count, actual_variables_count);
         }
 
         [TestMethod]
