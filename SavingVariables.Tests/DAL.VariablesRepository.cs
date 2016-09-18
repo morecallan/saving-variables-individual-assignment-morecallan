@@ -75,7 +75,13 @@ namespace SavingVariables.Tests
         [TestMethod]
         public void VariablesRepoOrignallyReturnsNoVariables()
         {
+            // Act
+            List<Variable> actual_variables = repo.GetCurrentVariables();
+            int expected_variables_count = 0;
+            int actual_variables_count = actual_variables.Count;
 
+            // Assert
+            Assert.AreEqual(expected_variables_count, actual_variables_count);
         }
 
         [TestMethod]

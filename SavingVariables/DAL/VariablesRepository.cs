@@ -20,5 +20,20 @@ namespace SavingVariables.DAL
         {
             return Context.Variables.ToList();
         }
+
+        /// CREATE ////
+        public void AddVariableAsEntity(Variable variable)
+        {
+            Context.Variables.Add(variable);
+            Context.SaveChanges();
+        }
+
+        /// CREATE ////
+        public void AddVariablesWithVarAndValParameter(char var, int val)
+        {
+            Variable my_new_variable = new Variable { VarSym = var.ToString(), Val = val };
+            Context.Variables.Add(my_new_variable);
+            Context.SaveChanges();
+        }
     }
 }
