@@ -78,14 +78,18 @@ namespace SavingVariables.DAL
 
 
         /// DESTROY ///
-        public void RemoveVariablesWithVarParameter(string var)
+        public Variable RemoveVariablesWithVarParameter(string var)
         {
             Variable variable_to_delete = FindVariablesGivenVarSym(var);
             if (variable_to_delete != null)
             {
                 Context.Variables.Remove(variable_to_delete);
                 Context.SaveChanges();
+            } else
+            {
+                throw new InvalidOperationException();
             }
+            return variable_to_delete;
         }
 
     }

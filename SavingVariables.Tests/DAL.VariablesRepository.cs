@@ -148,6 +148,10 @@ namespace SavingVariables.Tests
             Variable variable_to_add = new Variable { VarSym = "x", Val = 4 };
             repo.AddVariableAsEntity(variable_to_add);
             repo.AddVariablesWithVarAndValParameter("x", 9);
+
+            //Assert
+            Assert.AreEqual(1, repo.GetCurrentVariables().Count());
+
         }
 
         [TestMethod]
@@ -158,6 +162,9 @@ namespace SavingVariables.Tests
             repo.AddVariablesWithVarAndValParameter("h", 9);
             Variable variable_to_add = new Variable { VarSym = "h", Val = 4 };
             repo.AddVariableAsEntity(variable_to_add);
+
+            //Assert
+            Assert.AreEqual(1, repo.GetCurrentVariables().Count());
         }
 
         [TestMethod]
@@ -202,12 +209,31 @@ namespace SavingVariables.Tests
             repo.AddVariablesWithVarAndValParameter("g", 9);
             repo.AddVariablesWithVarAndValParameter("d", 11);
 
+            //Act
+            Variable variable_deleted = repo.RemoveVariablesWithVarParameter("d");
+            int expected_updated_variable_count = 2;
+            int actual_updated_variable_count = repo.GetCurrentVariables().Count();
+
+            Assert.AreEqual(expected_updated_variable_count, actual_updated_variable_count);
+            Assert.AreEqual(variable_deleted.VarSym, "d");
         }
 
         [TestMethod]
+        [ExpectedException(typeof(System.InvalidOperationException))]
         public void VariablesRepoShouldNotBeAbleToDeleteAVariableThatDoesNotExit()
         {
+            // Arrange
+            Variable variable_to_add = new Variable { VarSym = "x", Val = 4 };
+            repo.AddVariableAsEntity(variable_to_add);
+            repo.AddVariablesWithVarAndValParameter("g", 9);
+            repo.AddVariablesWithVarAndValParameter("d", 11);
 
+            //Act
+            Variable variable_deleted = repo.RemoveVariablesWithVarParameter("k");
+            int expected_updated_variable_count = 3;
+            int actual_updated_variable_count = repo.GetCurrentVariables().Count();
+
+            Assert.AreEqual(expected_updated_variable_count, actual_updated_variable_count);
         }
     }
 }
