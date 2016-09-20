@@ -9,17 +9,27 @@ namespace SavingVariables
 {
     public class Commands
     {
-        public string Action(string input)
+        public Stack SessionStack { get; set; }
+
+        public Commands(Stack current_stack)
         {
-            string output = "";
-            switch (input)
-            {
-                case "lastq": /* TODO: Evalu ate Stack*/ break;
-                case "quit": Environment.Exit(0); break;
-                case "exit": Environment.Exit(0); break;
-                default:  /* TODO: Evaluate Command*/ break;
-            }
-            return output;
+            SessionStack = current_stack;
+        }
+
+        public string Output { get; set; }
+        
+        //OUTPUT STRINGS
+        private string no_last_command = "You haven't even answered one command.";
+
+        public void Action(string input)
+        {
+                switch (input)
+                 {
+                    case "lastq": Output = SessionStack.LastCommand != null ? SessionStack.LastCommand : no_last_command; break;
+                    case "quit": Environment.Exit(0); break;
+                    case "exit": Environment.Exit(0); break;
+                    default:  /* TODO: Evaluate Command*/ break;
+                }
         }
 
 
