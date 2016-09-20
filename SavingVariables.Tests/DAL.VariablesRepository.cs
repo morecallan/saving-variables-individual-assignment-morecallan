@@ -33,6 +33,9 @@ namespace SavingVariables.Tests
             // Add | Remove  stuff to our representatve table
             mock_variable_table.Setup(t => t.Add(It.IsAny<Variable>())).Callback((Variable v) => variable_list.Add(v));
             mock_variable_table.Setup(t => t.Remove(It.IsAny<Variable>())).Callback((Variable a) => variable_list.Remove(a));
+            //mock_variable_table.Setup(t => t.Find(It.IsAny<string>())).Callback((string a) => variable_list.Find( x => x.VarSym == a));
+            //mock_variable_table.Setup(t => t.Find(It.IsAny<string[]>())).Returns((string a) => variable_list.Find(x => x.VarSym == a));
+
         }
 
         // RESET before each test

@@ -14,13 +14,15 @@ namespace SavingVariables
             string output = "";
             switch (input)
             {
-                case "lastq": /* TODO: Evaluate Stack*/ break;
+                case "lastq": /* TODO: Evalu ate Stack*/ break;
                 case "quit": Environment.Exit(0); break;
                 case "exit": Environment.Exit(0); break;
                 default:  /* TODO: Evaluate Command*/ break;
             }
             return output;
         }
+
+
         //Commands:
 
         ////// GENERAL //////
