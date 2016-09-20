@@ -74,6 +74,7 @@
     <Compile Include="Model.Variable.Tests.cs" />
     <Compile Include="DAL.VariablesContext..cs" />
     <Compile Include="DAL.VariablesRepository.cs" />
+    <Compile Include="Stack.Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SavingVariables\SavingVariables.csproj">
