@@ -9,6 +9,7 @@ namespace SavingVariables.DAL
     {
         public VariablesContext Context { get; set; }
 
+
         public VariablesRepository(VariablesContext _context)
         {
             Context = _context;
@@ -27,24 +28,6 @@ namespace SavingVariables.DAL
         {
             Variable my_found_var = Context.Variables.FirstOrDefault(x => x.VarSym == var_sym);
             return my_found_var;
-
-            /*
-            List<Variable> current_variable_list = GetCurrentVariables();
-            Variable found_variable = null;
-            foreach (var variable in current_variable_list)
-            {
-                if (variable.VarSym == var_sym)
-                {
-                    found_variable = variable;
-                    return found_variable;
-                }
-                else
-                {
-                    found_variable = null;
-                }
-            }
-            return found_variable;
-            */
         }
 
         /// CREATE ////
@@ -92,6 +75,16 @@ namespace SavingVariables.DAL
                 throw new InvalidOperationException();
             }
             return variable_to_delete;
+        }
+
+        public void RemoveAllVariables()
+        {
+            List<Variable> variables_in_database = GetCurrentVariables();
+            foreach (var variable in variables_in_database)
+            {
+                Context.Variables.Remove(variable);
+            }
+            Context.SaveChanges();
         }
 
     }
