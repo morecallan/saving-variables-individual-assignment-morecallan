@@ -94,5 +94,15 @@ namespace SavingVariables.DAL
             return variable_to_delete;
         }
 
+        public void RemoveAllVariables()
+        {
+            List<Variable> variables_in_database = GetCurrentVariables();
+            foreach (var variable in variables_in_database)
+            {
+                Context.Variables.Remove(variable);
+            }
+            Context.SaveChanges();
+        }
+
     }
 }

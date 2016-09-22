@@ -103,6 +103,17 @@ namespace SavingVariables
                     case "delete": database.RemoveVariablesWithVarParameter(target); Output = VariableCleared; break;
                     case "show": List<Variable> variables = database.GetCurrentVariables(); Output = PrintedList(variables); break;
                 }
+                else
+                {
+                    switch(command)
+                    {
+                        case "clear": database.RemoveAllVariables(); Output = VariableCleared; break;
+                        case "remove": database.RemoveAllVariables(); Output = VariableCleared; break;
+                        case "delete": database.RemoveAllVariables(); Output = VariableCleared; break;
+                        case "show": List<Variable> variables = database.GetCurrentVariables(); Output = PrintedList(variables); break;
+                    }
+                    
+                }
             }
         }
 
