@@ -9,6 +9,7 @@ namespace SavingVariables.DAL
     {
         public VariablesContext Context { get; set; }
 
+
         public VariablesRepository(VariablesContext _context)
         {
             Context = _context;
@@ -66,6 +67,7 @@ namespace SavingVariables.DAL
         public void AddVariablesWithVarAndValParameter(string var, int val)
         {
             Variable variable_check = FindVariablesGivenVarSym(var);
+            Console.WriteLine(variable_check);
             if (variable_check == null)
             {
                 Variable my_new_variable = new Variable { VarSym = var, Val = val };

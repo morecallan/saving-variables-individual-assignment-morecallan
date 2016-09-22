@@ -11,7 +11,7 @@ namespace SavingVariables
 {
     public class Evaluate
     {
-        VariablesRepository database = new VariablesRepository(new VariablesContext());
+        VariablesRepository database = new VariablesRepository(new VariablesContext() );
 
         public string Output { get; set; }
 
@@ -28,10 +28,10 @@ namespace SavingVariables
 
             foreach (var variable in variables)
             {
-                printerString += CenterValue(variable.VarSym, 6);
+                printerString += "   |"+ CenterValue(variable.VarSym, 6);
                 printerString += "|";
-                printerString += CenterValue(variable.Val.ToString(), 6);
-                printerString += "\n";
+                printerString += CenterValue(variable.Val.ToString(), 7);
+                printerString += "|\n";
             }
             printerString += "   |______|_______|";
             return printerString;
@@ -40,18 +40,18 @@ namespace SavingVariables
         public string CenterValue(string value, int width)
         {
             string centered_string = "";
-            int leadingSpaces = (int)Math.Ceiling((double)(width - value.Length) / 2);
-            int followingSpaces = (int)Math.Floor((double)(width - value.Length) / 2);
+            int leadingSpaces = (int)Math.Ceiling((double)((width - value.Length) / 2));
+            int followingSpaces = (int)Math.Floor((double)((width - value.Length) / 2));
 
             int i = 0;
             int j = 0;
-            while (i <= leadingSpaces)
+            while (i < leadingSpaces)
             {
                 centered_string += " ";
                 i++;
             }
             centered_string += value;
-            while (j <= followingSpaces)
+            while (j < followingSpaces)
             {
                 centered_string += " ";
                 j++;
@@ -74,7 +74,7 @@ namespace SavingVariables
 
         private bool CheckToSeeIfVariableIsBeingSet(string input)
         {
-            string pattern = @"^(?<varSym>[a-zA-Z]{1})(\s*[\=]\s*)?(?<val>[1-9])?$";
+            string pattern = @"^(?<varSym>[a-zA-Z]{1})\s*([\=])?\s*(?<val>[1-9])?$";
             Match match = Regex.Match(input, pattern);
             if (match.Success)
             {
@@ -121,8 +121,9 @@ namespace SavingVariables
                 Match match = Regex.Match(input, pattern);
                 string varSym = match.Groups["varSym"].Value;
                 string value = match.Groups["val"].Value;
+                Console.WriteLine(value);
 
-                if (value != null || value != "")
+                if (value != null && value != "")
                 {
                     int valueInt = Int32.Parse(value);
                     database.AddVariablesWithVarAndValParameter(varSym, valueInt);

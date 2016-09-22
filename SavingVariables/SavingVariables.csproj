@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201609171838266_InitiallyCreated.Designer.cs">
       <DependentUpon>201609171838266_InitiallyCreated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609220324555_FinalVar.cs" />
+    <Compile Include="Migrations\201609220324555_FinalVar.Designer.cs">
+      <DependentUpon>201609220324555_FinalVar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Variable.cs" />
     <Compile Include="Program.cs" />
@@ -73,6 +77,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609171838266_InitiallyCreated.resx">
       <DependentUpon>201609171838266_InitiallyCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220324555_FinalVar.resx">
+      <DependentUpon>201609220324555_FinalVar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
