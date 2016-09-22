@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SavingVariables.DAL;
 using System.Text.RegularExpressions;
+using SavingVariables.Models;
 
 namespace SavingVariables
 {
@@ -12,6 +13,51 @@ namespace SavingVariables
     {
         VariablesRepository database = new VariablesRepository(new VariablesContext());
 
+        public string Output { get; set; }
+
+        //Output messages
+        private string VariableCleared = "Variable successfully removed.";
+
+
+        public string PrintedList (List<Variable> variables)
+        {
+            string printerString = "";
+            printerString += "    ______________\n";
+            printerString += "   | Name | Value |\n";
+            printerString += "   |--------------|\n";
+
+            foreach (var variable in variables)
+            {
+                printerString += CenterValue(variable.VarSym, 6);
+                printerString += "|";
+                printerString += CenterValue(variable.Val.ToString(), 6);
+                printerString += "\n";
+            }
+            printerString += "   |______|_______|";
+            return printerString;
+        }
+
+        public string CenterValue(string value, int width)
+        {
+            string centered_string = "";
+            int leadingSpaces = (int)Math.Ceiling((double)(width - value.Length) / 2);
+            int followingSpaces = (int)Math.Floor((double)(width - value.Length) / 2);
+
+            int i = 0;
+            int j = 0;
+            while (i <= leadingSpaces)
+            {
+                centered_string += " ";
+                i++;
+            }
+            centered_string += value;
+            while (j <= followingSpaces)
+            {
+                centered_string += " ";
+                j++;
+            }
+            return centered_string;
+        }
         private bool CheckToSeeIfCommandIsInvolved(string input)
         {
             string pattern = @"^(?<command>clear|remove|delete|show)\s*(?<target>all|[a-zA-Z])$";
@@ -39,6 +85,27 @@ namespace SavingVariables
                 return false;
             }
         }
+
+        public void Evaluation (string input)
+        {
+            if (CheckToSeeIfCommandIsInvolved(input)) 
+            {
+                string pattern = @"^(?<command>clear|remove|delete|show)\s*(?<target>all|[a-zA-Z])$";
+                Match match = Regex.Match(input, pattern);
+                string command = match.Groups["command"].Value;
+                string target = match.Groups["target"].Value;
+
+                if (target != "all")
+                switch (command)
+                {
+                    case "clear": database.RemoveVariablesWithVarParameter(target); Output = VariableCleared; break;
+                    case "remove": database.RemoveVariablesWithVarParameter(target); Output = VariableCleared; break;
+                    case "delete": database.RemoveVariablesWithVarParameter(target); Output = VariableCleared; break;
+                    case "show": List<Variable> variables = database.GetCurrentVariables(); Output = PrintedList(variables); break;
+                }
+            }
+        }
+
 
     }
 }

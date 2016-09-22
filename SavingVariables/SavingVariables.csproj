@@ -55,6 +55,7 @@
     <Compile Include="Commands.cs" />
     <Compile Include="DAL\VariablesContext.cs" />
     <Compile Include="DAL\VariablesRepository.cs" />
+    <Compile Include="Evaluate.cs" />
     <Compile Include="Migrations\201609171838266_InitiallyCreated.cs" />
     <Compile Include="Migrations\201609171838266_InitiallyCreated.Designer.cs">
       <DependentUpon>201609171838266_InitiallyCreated.cs</DependentUpon>
@@ -73,6 +74,9 @@
     <EmbeddedResource Include="Migrations\201609171838266_InitiallyCreated.resx">
       <DependentUpon>201609171838266_InitiallyCreated.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controller\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
