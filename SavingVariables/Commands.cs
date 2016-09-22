@@ -16,6 +16,7 @@ namespace SavingVariables
             SessionStack = current_stack;
         }
 
+        public Evaluate evaluation = new Evaluate();
         public string Output { get; set; }
         
         //OUTPUT STRINGS
@@ -30,7 +31,7 @@ namespace SavingVariables
                     case "lastq": Output = SessionStack.LastCommand != null ? SessionStack.LastCommand : no_last_command; break;
                     case "quit": Environment.Exit(0); break;
                     case "exit": Environment.Exit(0); break;
-                    default:  /* TODO: Evaluate Command*/ break;
+                    default: evaluation.Evaluation(input); Output = evaluation.Output; break;
                 }
         }
 

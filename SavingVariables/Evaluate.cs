@@ -17,8 +17,8 @@ namespace SavingVariables
 
         //Output messages
         private string VariableCleared = "Variable successfully removed.";
-
-
+        private string VariableAdded = "You successfully added a variable!!!";
+        private string UnknownCommand = "I don't know what the hell you are talking about, dude. Try using a real command.";
         public string PrintedList (List<Variable> variables)
         {
             string printerString = "";
@@ -114,6 +114,29 @@ namespace SavingVariables
                     }
                     
                 }
+            }
+            else if (CheckToSeeIfVariableIsBeingSet(input))
+            {
+                string pattern = @"^(?<varSym>[a-zA-Z]{1})(\s*[\=]\s*)?(?<val>[1-9])?$";
+                Match match = Regex.Match(input, pattern);
+                string varSym = match.Groups["varSym"].Value;
+                string value = match.Groups["val"].Value;
+
+                if (value != null || value != "")
+                {
+                    int valueInt = Int32.Parse(value);
+                    database.AddVariablesWithVarAndValParameter(varSym, valueInt);
+                    Output = VariableAdded;
+                }
+                else
+                {
+                    Variable found_var = database.FindVariablesGivenVarSym(varSym);
+                    Output = found_var.Val.ToString();
+                }
+            }
+            else
+            {
+                Output = UnknownCommand;
             }
         }
 
