@@ -28,24 +28,6 @@ namespace SavingVariables.DAL
         {
             Variable my_found_var = Context.Variables.FirstOrDefault(x => x.VarSym == var_sym);
             return my_found_var;
-
-            /*
-            List<Variable> current_variable_list = GetCurrentVariables();
-            Variable found_variable = null;
-            foreach (var variable in current_variable_list)
-            {
-                if (variable.VarSym == var_sym)
-                {
-                    found_variable = variable;
-                    return found_variable;
-                }
-                else
-                {
-                    found_variable = null;
-                }
-            }
-            return found_variable;
-            */
         }
 
         /// CREATE ////
@@ -67,7 +49,6 @@ namespace SavingVariables.DAL
         public void AddVariablesWithVarAndValParameter(string var, int val)
         {
             Variable variable_check = FindVariablesGivenVarSym(var);
-            Console.WriteLine(variable_check);
             if (variable_check == null)
             {
                 Variable my_new_variable = new Variable { VarSym = var, Val = val };

@@ -76,14 +76,16 @@ namespace SavingVariables
 
         private bool CheckToSeeIfVariableIsBeingSet(string input)
         {
-            string pattern = @"^(?<varSym>[a-zA-Z]{1})\s*(\s*[\=]\s*)?\s*(?<val>[1-9])?$";
+            string pattern = @"^(?<varSym>[a-zA-Z]{1})\s*(\s*[\=]\s*)?\s*(?<val>[0-9]+)?$";
             Match match = Regex.Match(input, pattern);
             if (match.Success)
             {
+                Console.WriteLine("true match");
                 return true;
             }
             else
             {
+                Console.WriteLine("false match");
                 return false;
             }
         }
@@ -119,7 +121,7 @@ namespace SavingVariables
             }
             else if (CheckToSeeIfVariableIsBeingSet(input))
             {
-                string pattern = @"^(?<varSym>[a-zA-Z]{1})\s*(\s*[\=]\s*)?\s*(?<val>[1-9])?$";
+                string pattern = @"^(?<varSym>[a-zA-Z]{1})\s*(\s*[\=]\s*)?\s*(?<val>[0-9]+)?$";
                 Match match = Regex.Match(input, pattern);
                 string varSym = match.Groups["varSym"].Value;
                 string value = match.Groups["val"].Value;
