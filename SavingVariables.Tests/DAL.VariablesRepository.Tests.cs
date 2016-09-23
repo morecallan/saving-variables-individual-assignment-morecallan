@@ -238,5 +238,24 @@ namespace SavingVariables.Tests
 
             Assert.AreEqual(expected_updated_variable_count, actual_updated_variable_count);
         }
+
+        [TestMethod]
+        public void VariablesRepoRemoveAllVariables()
+        {
+            // Arrange
+            Variable variable_to_add = new Variable { VarSym = "x", Val = 4 };
+            repo.AddVariableAsEntity(variable_to_add);
+            repo.AddVariablesWithVarAndValParameter("g", 9);
+            repo.AddVariablesWithVarAndValParameter("d", 11);
+
+            // Act
+            repo.RemoveAllVariables();
+            int expected_number_of_variables = 0;
+            int actual_number_of_variables = repo.GetCurrentVariables().Count;
+
+            //Assert
+            Assert.AreEqual(expected_number_of_variables, actual_number_of_variables);
+
+        }
     }
 }

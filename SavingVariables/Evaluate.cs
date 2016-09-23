@@ -125,7 +125,6 @@ namespace SavingVariables
                 Match match = Regex.Match(input, pattern);
                 string varSym = match.Groups["varSym"].Value;
                 string value = match.Groups["val"].Value;
-                Console.WriteLine(value);
 
                 if (value != null && value != "")
                 {
