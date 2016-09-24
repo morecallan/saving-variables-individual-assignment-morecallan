@@ -31,13 +31,14 @@ namespace SavingVariables
                     case "lastq": Output = SessionStack.LastCommand != null ? SessionStack.LastCommand : OutputMessages.NoLastCommand(); break;
                     case "quit": Environment.Exit(0); break;
                     case "exit": Environment.Exit(0); break;
-                    case "help": Output = OutputMessages.Help(); break;
-                    default: evaluation.Evaluation(input); Output = evaluation.Output; break;
+                    case "shut up": Environment.Exit(0); break;
+                    case "help": SessionStack.LastCommand = input; Output = OutputMessages.Help(); break;
+                    default: evaluation.Evaluation(input); SessionStack.LastCommand = input; Output = evaluation.Output; break;
                 }
         }
 
 
-        //Commands:
+        //Commands via product owner:
 
         ////// GENERAL //////
         // lastq:  prints the last entered command or expression even if it was unsuccessful
