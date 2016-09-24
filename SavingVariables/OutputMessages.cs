@@ -122,5 +122,11 @@ namespace SavingVariables
             return String.Format("{0}Unrecognized command. Type 'help' for command assistance");
         }
 
+        //No Last Command for Stack Class
+        public static string NoLastCommand()
+        {
+            return String.Format("{0}No last command entered.", LeadingSpaces);
+        }
+
     }
 }
