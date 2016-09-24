@@ -11,32 +11,34 @@ namespace SavingVariables
     {
         public Stack SessionStack { get; set; }
 
+        // Commands class is dependent on current session stack and can only be instantiated with this value.
         public Commands(Stack current_stack)
         {
             SessionStack = current_stack;
         }
 
+        //Instantiates Evaluation class for all the "heavy lifting".
         public Evaluate evaluation = new Evaluate();
-        public string Output { get; set; }
-        
-        //OUTPUT STRINGS
-        private string no_last_command = "You haven't even answered one command.";
 
+        //Output that displays on the screen for CLI
+        public string Output { get; set; }
 
 
         public void Action(string input)
         {
                 switch (input)
                  {
-                    case "lastq": Output = SessionStack.LastCommand != null ? SessionStack.LastCommand : no_last_command; break;
+                    case "lastq": Output = SessionStack.LastCommand != null ? SessionStack.LastCommand : OutputMessages.NoLastCommand(); break;
                     case "quit": Environment.Exit(0); break;
                     case "exit": Environment.Exit(0); break;
-                    default: evaluation.Evaluation(input); Output = evaluation.Output; break;
+                    case "shut up": Environment.Exit(0); break;
+                    case "help": SessionStack.LastCommand = input; Output = OutputMessages.Help(); break;
+                    default: evaluation.Evaluation(input); SessionStack.LastCommand = input; Output = evaluation.Output; break;
                 }
         }
 
 
-        //Commands:
+        //Commands via product owner:
 
         ////// GENERAL //////
         // lastq:  prints the last entered command or expression even if it was unsuccessful

@@ -10,14 +10,21 @@ namespace SavingVariables
     {
         static void Main(string[] args)
         {
+            //Initiates a new session and loop
             bool running = true;
             Stack session_stack = new Stack();
             Commands session = new Commands(session_stack);
 
+            //Greeting
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Welcome to the non-functioning calculator. You can save variables but if you've come here to do anything else, you are in the wrong place, my friend.");
+            Console.ResetColor();
+
+            //Loops until user exits the program
             while (running)
             {
-                Console.WriteLine("Enter a command. >");
-                session.Action(Console.ReadLine());
+                Console.Write(">> ");
+                session.Action(Console.ReadLine().ToLower());
                 Console.WriteLine(session.Output);
             }
         }
