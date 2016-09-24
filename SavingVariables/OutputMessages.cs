@@ -7,40 +7,40 @@ using System.Threading.Tasks;
 
 namespace SavingVariables
 {
-    public static class Output
+    public static class OutputMessages
     {
 
         // Leading Spaces
-        static string LeadingSpaces = "   ";
+        private static string LeadingSpaces = "   ";
 
 
 
         // Create Success
-        static string VariableSaved(string var, int val)
+        public static string VariableSaved(string var, int val)
         {
             return String.Format("{0}=  saved '{1}' as '{2}'", LeadingSpaces, var, val);
         }
 
         // Create Error
-        static string VariableAlreadySavedError(string var, int val)
+        public static string VariableAlreadySavedError(string var, int val)
         {
             return String.Format("{0}=  Error! '{1}' is already defined! Remember, it's '{2}'?", LeadingSpaces, var, val);
         }
 
         // Read Single Success
-        static string VariableValue(int val)
+        public static string VariableValue(int val)
         {
             return String.Format("{0}=  {1}", LeadingSpaces, val);
         }
 
         // Read Single Error
-        static string VariableValueError(string var)
+        public static string VariableValueError(string var)
         {
             return String.Format("{0}=  '{1}' has not yet been set.", LeadingSpaces, var);
         }
 
         // Read All Success - Table
-        static string PrintedList(List<Variable> variables)
+        public static string PrintedList(List<Variable> variables)
         {
             string printerString = "";
             printerString += "    ______________\n";
@@ -58,7 +58,7 @@ namespace SavingVariables
             return printerString;
         }
 
-        static string CenterValue(string value, int width)
+        private static string CenterValue(string value, int width)
         {
             string centered_string = "";
             int leadingSpaces = (int)Math.Ceiling((double)((width - value.Length) / 2));
@@ -81,39 +81,45 @@ namespace SavingVariables
         }
 
         // Read All Error
-        static string PrintAllVariablesError()
+        public static string PrintAllVariablesError()
         {
             return String.Format("{0}= Database empty! Nothing to show.", LeadingSpaces);
         }
 
         // Destroy Success 
-        static string VariableCleared(string var)
+        public static string VariableCleared(string var)
         {
             return String.Format("{0}=  '{1}' is now free!", LeadingSpaces, var);
         }
 
         // Destroy Error
-        static string VariableClearError(string var)
+        public static string VariableClearError(string var)
         {
-            return String.Format("{0}=  {1} has not yet been declared.");
+            return String.Format("{0}=  '{1}' has not yet been declared.", LeadingSpaces, var);
         }
 
         //Destroy All Success
-        static string AllVariablesCleared()
+        public static string AllVariablesCleared()
         {
             return String.Format("{0}= deleted all items from database!", LeadingSpaces);
         }
 
         //Destroy All Error
-        static string AllVariableClearError()
+        public static string AllVariableClearError()
         {
             return String.Format("{0}= No items to delete from database.", LeadingSpaces);
         }
 
         //HALP Message
-        static string Help()
+        public static string Help()
         {
-            return String.Format("{0} show all: prints out all variables (with their values) in tabular form saved within the database \n{0}lastq: prints the last entered command or expression **even if it was unsuccessful**.\n{0}quit|exit: exits the program", LeadingSpaces);
+            return String.Format("{0}show all: prints out all variables (with their values) in tabular form saved within the database \n{0}lastq: prints the last entered command or expression **even if it was unsuccessful**.\n{0}quit|exit: exits the program", LeadingSpaces);
+        }
+
+        //Unrecognized command
+        public static string UnknownCommand()
+        {
+            return String.Format("{0}Unrecognized command. Type 'help' for command assistance");
         }
 
     }
