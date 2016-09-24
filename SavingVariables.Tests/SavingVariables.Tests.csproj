@@ -71,7 +71,7 @@
   <ItemGroup>
     <Compile Include="Commands.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DAL.VariablesRepository.cs" />
+    <Compile Include="DAL.VariablesRepository.Tests.cs" />
     <Compile Include="Stack.Tests.cs" />
   </ItemGroup>
   <ItemGroup>

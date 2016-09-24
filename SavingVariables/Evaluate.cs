@@ -85,7 +85,8 @@ namespace SavingVariables
                 {
                     SetVariable(varSym, value);
                 }
-                else //If user simply wants to see the value of a variable (they may or may not have set).
+                //If user simply wants to see the value of a variable (they may or may not have set).
+                else
                 {
                     ShowSingleVar(varSym);
                 }
@@ -93,9 +94,7 @@ namespace SavingVariables
             else
             {
                 Output = OutputMessages.UnknownCommand();
-            }
-            
-            
+            }       
         }
 
         /// Execution Functions ///
